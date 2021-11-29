@@ -2,22 +2,24 @@
 require_once './db/AccesoDatos.php';
 
 class Producto{
-    public $id_produc;
+    public $idProduc;
     public $nombre;
     public $precio;
-    public $stock;
     public $tipo;
     public $perfilEmpleado;
+    public $idPuesto;
+    public $puesto;
 
     public function crearProducto()
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDatos->prepararConsulta("INSERT INTO productos (nombre, precio, stock, tipo, perfilEmpleado) VALUES (:nombre, :precio, :stock, :tipo, :perfilEmpleado)");
+        $consulta = $objAccesoDatos->prepararConsulta("INSERT INTO productos (nombre, precio, tipo, perfilEmpleado, idPuesto, puesto) VALUES (:nombre, :precio, :tipo, :perfilEmpleado, :idPuesto, :puesto)");
         $consulta->bindValue(':nombre', $this->nombre, PDO::PARAM_STR);
         $consulta->bindValue(':precio', $this->precio, PDO::PARAM_STR);
-        $consulta->bindValue(':stock', $this->stock, PDO::PARAM_STR);
         $consulta->bindValue(':tipo', $this->tipo, PDO::PARAM_STR);
         $consulta->bindValue(':perfilEmpleado', $this->perfilEmpleado, PDO::PARAM_STR);
+        $consulta->bindValue(':idPuesto', $this->idPuesto, PDO::PARAM_INT);
+        $consulta->bindValue(':puesto', $this->puesto, PDO::PARAM_STR);
         $consulta->execute();
 
         return $objAccesoDatos->obtenerUltimoId();
@@ -26,41 +28,106 @@ class Producto{
     public static function obtenerTodos()
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDatos->prepararConsulta("SELECT id_produc, nombre, precio, stock, tipo, perfilEmpleado FROM productos");
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT idProduc, nombre, precio, tipo, perfilEmpleado, idPuesto, puesto FROM productos");
         $consulta->execute();
 
         return $consulta->fetchAll(PDO::FETCH_CLASS, 'Producto');
     }
 
-    public static function obtenerProducto($id_produc)
+    public static function obtenerProducto($idProduc)
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDatos->prepararConsulta("SELECT id_produc, nombre, precio, stock, tipo, perfilEmpleado FROM productos WHERE id_produc = :id_produc");
-        $consulta->bindValue(':id_produc', $id_produc, PDO::PARAM_INT);
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT idProduc, nombre, precio, tipo, perfilEmpleado, idPuesto, puesto FROM productos WHERE idProduc = :idProduc");
+        $consulta->bindValue(':idProduc', $idProduc, PDO::PARAM_INT);
         $consulta->execute();
 
         return $consulta->fetchObject('Producto');
     }
 
-    public function modificarProducto($id_produc)
+    public static function obtenerSectorProducto($id)
+    {
+        $objAccesoDatos = AccesoDatos::obtenerInstancia();
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT idProduc, nombre, precio, tipo, perfilEmpleado, idPuesto, puesto FROM productos WHERE puesto = :puesto");
+        $consulta->bindValue(':puesto', $id, PDO::PARAM_INT);
+        $consulta->execute();
+
+        return $consulta->fetchObject('Producto');
+    }
+
+    public function modificarProducto($idProduc)
     {
         $objAccesoDato = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDato->prepararConsulta("UPDATE productos SET nombre = :nombre, precio = :precio,stock = :stock, tipo = :tipo, perfilEmpleado = :perfilEmpleado WHERE id_produc = :id_produc");
-        $consulta->bindValue(':id_produc', $id_produc, PDO::PARAM_INT);
+        $consulta = $objAccesoDato->prepararConsulta("UPDATE productos SET nombre = :nombre, precio = :precio, tipo = :tipo, perfilEmpleado = :perfilEmpleado,, idPuesto = :idPuesto, puesto = :puesto WHERE idProduc = :idProduc");
+        $consulta->bindValue(':idProduc', $idProduc, PDO::PARAM_INT);
         $consulta->bindValue(':nombre', $this->nombre, PDO::PARAM_STR);
         $consulta->bindValue(':precio', $this->precio, PDO::PARAM_STR);
-        $consulta->bindValue(':stock', $this->stock, PDO::PARAM_STR);
         $consulta->bindValue(':tipo', $this->tipo, PDO::PARAM_STR);
         $consulta->bindValue(':perfilEmpleado', $this->perfilEmpleado, PDO::PARAM_STR);
+        $consulta->bindValue(':idPuesto', $this->idPuesto, PDO::PARAM_INT);
+        $consulta->bindValue(':puesto', $this->puesto, PDO::PARAM_STR);
         $consulta->execute();
     }
 
-    public static function borrarProducto($id_produc)
+    public static function borrarProducto($idProduc)
     {
         $objAccesoDato = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDato->prepararConsulta("DELETE FROM productos WHERE id_produc = :id_produc");
-        $consulta->bindValue(':id_produc', $id_produc, PDO::PARAM_INT);
+        $consulta = $objAccesoDato->prepararConsulta("DELETE FROM productos WHERE idProduc = :idProduc");
+        $consulta->bindValue(':idProduc', $idProduc, PDO::PARAM_INT);
         $consulta->execute();
+    }
+
+    public function Mostrar()
+    {
+        echo "---- PRODUCTO ----"."\n";
+        echo "Id: ".$this->idProduc."\n";
+        echo "Nombre: ".$this->nombre."\n";
+        echo "Tipo: ".$this->tipo."\n";
+        echo "Precio: ".$this->precio."\n";
+        echo "Puesto: ".$this->puesto."\n";
+        echo "Usuario: ".$this->perfilEmpleado."\n";
+    }
+
+    public static function Listar($lista)
+    {
+        foreach ($lista as $obj)
+        {
+            $obj->Mostrar();
+        }
+    }
+
+    public function ValidarPuesto($p)
+    {
+        switch($p)
+        {
+            case 'Bartender':
+                return 1;
+            case 'Cervecero':
+                return 2;
+            case 'Cocinero':
+                return 3;
+            case 'Mozo':
+                return 4;
+            case 'Socio':
+                return 5;
+                break;
+            default:
+                throw new Exception ("Perfil invalido");
+        }
+    }
+
+    public function ValidarTipo($t)
+    {
+        switch($t)
+        {
+            case 'Comida':
+                return 'Comida';
+            case 'Cerveza':
+                return 'Cerveza';
+            case 'Trago':
+                return 'Trago';
+            default:
+                throw new Exception ("Tipo de producto invalido");
+        }
     }
 }
 

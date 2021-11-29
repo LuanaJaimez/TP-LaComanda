@@ -8,16 +8,25 @@ class MesaController extends Mesa implements IApiUsable
     {
         $parametros = $request->getParsedBody();
 
-        $numero = $parametros['numero'];
-        $estadoMesa = $parametros['estadoMesa'];
+        $idUser = $parametros['idUser'];
+        $estadoMesa = "Esperando";
 
         // Creamos la mesa
         $mesa = new Mesa();
-        $mesa->numero = $numero;
         $mesa->estadoMesa = $estadoMesa;
-        $mesa->crearMesa();
+        if(Mesa::ValidarUser($idUser))
+        {
+          $mesa->idUser = $idUser;
+          $mesa->crearMesa();
+  
+          $payload = json_encode(array("mensaje" => "Mesa creada con exito"));
+          $mesa->Mostrar();
+        }
+        else
+        {
+          $payload = json_encode(array("mensaje" => "Error al crear la mesa"));
+        }
 
-        $payload = json_encode(array("mensaje" => "Mesa creada con exito"));
 
         $response->getBody()->write($payload);
         return $response
@@ -27,7 +36,7 @@ class MesaController extends Mesa implements IApiUsable
     public function TraerUno($request, $response, $args)
     {
         // Buscamos mesa por numero
-        $mesa = $args['numeor'];
+        $mesa = $args['numero'];
         $unaMesa = Mesa::obtenerMesa($mesa);
         $payload = json_encode($unaMesa);
 
@@ -72,6 +81,31 @@ class MesaController extends Mesa implements IApiUsable
         $response->getBody()->write($payload);
         return $response
           ->withHeader('Content-Type', 'application/json');
+    }
+  
+    public function CerrarMesa($request, $response, $args){
+      $parametros = $request->getParsedBody();
+      
+      $estadoMesa = $parametros['estadoMesa']; 
+      $idMesa = $parametros['idMesa'];
+      
+      $m = Mesa::obtenerMesa($idMesa);
+      $e = Mesa::ValidarEstado($estadoMesa);
+      if($estadoMesa != NULL && $idMesa != NULL)
+      { 
+        if($e >= 0 && $e < 5)
+        {
+            $m->estadoMesa = $estadoMesa; 
+            $m->modificar();
+            $payload = json_encode(array("mensaje" => "Mesa cerrada"));
+        }
+        else
+        {
+        $payload = json_encode(array("error" => "Error al cerrar la mesa"));    
+        }  
+      }
+      $response->getBody()->write($payload);
+      return $response ->withHeader('Content-Type', 'application/json');
     }
 }
 ?>

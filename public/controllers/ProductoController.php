@@ -8,24 +8,49 @@ class ProductoController extends Producto implements IApiUsable
     {
         $parametros = $request->getParsedBody();
 
-        $id_produc = $parametros['id_produc'];
         $nombre = $parametros['nombre'];
         $precio = $parametros['precio'];
-        $stock = $parametros['stock'];
         $tipo = $parametros['tipo'];
         $perfilEmpleado = $parametros['perfilEmpleado'];
 
         // Creamos el Producto
         $produc = new Producto();
-        $produc->id_produc = $id_produc;
         $produc->nombre = $nombre;
         $produc->precio = $precio;
-        $produc->stock = $stock;
-        $produc->tipo = $tipo;
+        $produc->tipo = Producto::ValidarTipo($tipo);
         $produc->perfilEmpleado = $perfilEmpleado;
+
+        if($tipo == 'Comida')
+        {
+          $produc->puesto = 'Cocinero';
+          $produc->idPuesto = Producto::ValidarPuesto($produc->puesto);
+        }
+        else if($tipo == 'Cerveza')
+        {
+          $produc->puesto = 'Cervecero';
+          $produc->idPuesto = Producto::ValidarPuesto($produc->puesto);
+        }
+        else if($tipo == 'Trago')
+        {
+          $produc->puesto = 'Bartender';
+          $produc->idPuesto = Producto::ValidarPuesto($produc->puesto);
+        }
+        else if($tipo == 'Comida' || $tipo == 'Cerveza' || $tipo == 'Trago')
+        {
+          $produc->puesto = 'Mozo';
+          $produc->idPuesto = Producto::ValidarPuesto($produc->puesto);
+        }
+        else
+        {
+          $produc->puesto = 'Socio';
+          $produc->idPuesto = Producto::ValidarPuesto($produc->puesto);
+        }
+
         $produc->crearProducto();
 
         $payload = json_encode(array("mensaje" => "Producto creado con exito"));
+
+        $produc->Mostrar();
 
         $response->getBody()->write($payload);
         return $response
@@ -35,13 +60,24 @@ class ProductoController extends Producto implements IApiUsable
     public function TraerUno($request, $response, $args)
     {
         // Buscamos Producto por id
-        $produc = $args['id_produc'];
+        $produc = $args['idProduc'];
         $producto = Producto::obtenerProducto($produc);
         $payload = json_encode($producto);
 
         $response->getBody()->write($payload);
         return $response
           ->withHeader('Content-Type', 'application/json');
+    }
+
+    public function TraerSector($request, $response, $args)
+    {
+      $produc = $args['puesto'];
+      $producto = Producto::obtenerSectorProducto($produc);
+      $payload = json_encode($producto);
+
+      $response->getBody()->write($payload);
+      return $response
+        ->withHeader('Content-Type', 'application/json');
     }
 
     public function TraerTodos($request, $response, $args)
@@ -58,7 +94,7 @@ class ProductoController extends Producto implements IApiUsable
     {
         $parametros = $request->getParsedBody();
 
-        $productoId = $parametros['id_produc'];
+        $productoId = $parametros['idProduc'];
         Producto::modificarProducto($productoId);
 
         $payload = json_encode(array("mensaje" => "Producto modificado con exito"));
@@ -72,7 +108,7 @@ class ProductoController extends Producto implements IApiUsable
     {
         $parametros = $request->getParsedBody();
 
-        $productoId = $parametros['id_produc'];
+        $productoId = $parametros['idProduc'];
         Producto::borrarProducto($productoId);
 
         $payload = json_encode(array("mensaje" => "Producto borrado con exito"));

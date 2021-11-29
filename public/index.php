@@ -11,6 +11,8 @@ require_once './controllers/MesaController.php';
 require_once './controllers/UsuarioController.php';
 require_once './controllers/ProductoController.php';
 require_once './controllers/PedidoController.php';
+require_once './middlewares/AuthJWT.php';
+require_once './middlewares/MWAccesos.php';
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->safeLoad();
@@ -20,36 +22,44 @@ $app ->addBodyParsingMiddleware();
 $errorMW = $app->addErrorMiddleware(true, true, true);
 
 //Peticiones
-$app->group('/usuarios', function (RouteCollectorProxy $group) {
-    $group->get('[/]', \UsuarioController::class . ':TraerTodos');
-    $group->get('/{id_user}', \UsuarioController::class . ':TraerUno');
-    $group->post('[/]', \UsuarioController::class . ':CargarUno');
-    $group->put('[/]', \UsuarioController::class . ':ModificarUno');
-    $group->delete('[/]', \UsuarioController::class . ':BorrarUno');
+$app->group('/usuarios', function (RouteCollectorProxy $group)
+{
+    $group->get('/traer', \UsuarioController::class . ':TraerTodos');
+    $group->get('/obtenerUsuario/{idUser}', \UsuarioController::class . ':TraerUno');
+    $group->post('/login', \UsuarioController::class . ':LogIn');
+    $group->post('/alta', \UsuarioController::class . ':CargarUno')->add(MWAccesos::class . ':EsSocio');
+    $group->put('/modificar', \UsuarioController::class . ':ModificarUno')->add(MWAccesos::class . ':EsSocio');
+    $group->delete('/borrar', \UsuarioController::class . ':BorrarUno')->add(MWAccesos::class . ':EsSocio');
   });
 
-$app->group('/mesas', function (RouteCollectorProxy $group){
-    $group->get('[/]', \MesaController::class . ':TraerTodos');
+$app->group('/mesas', function (RouteCollectorProxy $group)
+{
+    $group->get('/traer', \MesaController::class . ':TraerTodos');
     $group->get('/{numero}', \MesaController::class . ':TraerUno');
-    $group->post('[/]', \MesaController::class . ':CargarUno');
-    $group->put('[/]', \MesaController::class . ':ModificarUno');
-    $group->delete('[/]', \MesaController::class . ':BorrarUno');
+    $group->post('/alta', \MesaController::class . ':CargarUno')->add(MWAccesos::class . ':EsSocio');
+    $group->put('/actualizarMesa', \MesaController::class. ':ActualizarMesa')->add(MWAccesos::class. ':EsMozo');
+    $group->put('/cerrarMesa', \MesaController::class. ':CerrarMesa')->add(MWAccesos::class. ':EsSocio');
+    $group->put('/modificar', \MesaController::class . ':ModificarUno')->add(MWAccesos::class . ':EsSocio');
+    $group->delete('/borrar', \MesaController::class . ':BorrarUno')->add(MWAccesos::class . ':EsSocio');
   });
 
-$app->group('/productos', function (RouteCollectorProxy $group){
-    $group->get('[/]', \ProductoController::class . ':TraerTodos');
-    $group->get('/{id_produc}', \ProductoController::class . ':TraerUno');
-    $group->post('[/]', \ProductoController::class . ':CargarUno');
-    $group->put('[/]', \ProductoController::class . ':ModificarUno');
-    $group->delete('[/]', \ProductoController::class . ':BorrarUno');
+$app->group('/productos', function (RouteCollectorProxy $group)
+{
+    $group->get('/traer', \ProductoController::class . ':TraerTodos');
+    $group->get('/{idProduc}', \ProductoController::class . ':TraerUno');
+    $group->post('/alta', \ProductoController::class . ':CargarUno')->add(MWAccesos::class . ':EsSocio');
+    $group->put('/modificar', \ProductoController::class . ':ModificarUno')->add(MWAccesos::class . ':EsSocio');
+    $group->delete('/borrar', \ProductoController::class . ':BorrarUno')->add(MWAccesos::class . ':EsSocio');
   });
 
-$app->group('/pedidos', function (RouteCollectorProxy $group){
-    $group->get('[/]', \PedidoController::class . ':TraerTodos');
+$app->group('/pedidos', function (RouteCollectorProxy $group)
+{    
+    $group->get('/traer', \PedidoController::class . ':TraerTodos');
     $group->get('/{codigo}', \PedidoController::class . ':TraerUno');
-    $group->post('[/]', \PedidoController::class . ':CargarUno');
-    $group->put('[/]', \PedidoController::class . ':ModificarUno');
-    $group->delete('[/]', \PedidoController::class . ':BorrarUno');
+    $group->post('/pendientes', \PedidoController::class . ':TraerPedidoPendiente');
+    $group->post('/alta', \PedidoController::class . ':CargarUno')->add(MWAccesos::class . ':EsMozoYSocio');
+    $group->put('/modificar', \PedidoController::class . ':ModificarUno')->add(MWAccesos::class . ':EsSocio');
+    $group->delete('/borrar', \PedidoController::class . ':BorrarUno')->add(MWAccesos::class . ':EsSocio');
   });
 
 $app->run();
