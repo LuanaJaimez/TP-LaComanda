@@ -12,11 +12,13 @@ class MesaController extends Mesa implements IApiUsable
         $numero = Mesa::CrearNumero();
         $nombre = $parametros['nombre'];
         $estadoMesa = "Esperando";
-
+        $cuenta = 0;
+        
         // Creamos la mesa
         $mesa = new Mesa();
         $mesa->numero = $numero;
         $mesa->estadoMesa = $estadoMesa;
+        $mesa->cuenta = $cuenta;
         if(Mesa::ValidarUser($nombre))
         {
           $mesa->nombre = $nombre;

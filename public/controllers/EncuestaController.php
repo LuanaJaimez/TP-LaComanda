@@ -20,17 +20,17 @@ class EncuestaController extends Encuesta
         if(!isset($parametros) || !isset($experiencia) || !isset($mesa) || !isset($restaurante) || !isset($mozo) || !isset($cocinero))
         {
           $payload = json_encode(array("mensaje" => "faltan datos"));
-          $response = $response->withlista(400);
+          $response = $response->withStatus(400);
         }
         else if(Mesa::obtenerMesa($codigo) == null)
         {
             $payload = json_encode(array("mensaje" => "numero de mesa incorrecto"));
-            $response = $response->withlista(400);
+            $response = $response->withStatus(400);
         }
         if(strlen($experiencia) > 67)
         {
             $payload = json_encode(array("mensaje" => "la experiencia es muy larga"));
-            $response = $response->withlista(400);
+            $response = $response->withStatus(400);
         }
         else
         {
@@ -43,7 +43,7 @@ class EncuestaController extends Encuesta
             $encuesta->restaurante = $restaurante;
             $encuesta->crearEncuesta();
             $payload = json_encode(array("mensaje" => "Encuesta guardada"));
-            $response = $response->withlista(201);
+            $response = $response->withStatus(201);
         }
         $response->getBody()->write($payload);
         return $response->withHeader('Content-Type', 'application/json');

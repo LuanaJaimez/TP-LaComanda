@@ -12,10 +12,11 @@ class Mesa{
     public function crearMesa()
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDatos->prepararConsulta("INSERT INTO mesas (numero, estadoMesa, nombre, cuenta) VALUES (:numero, :estadoMesa, :nombre)");
+        $consulta = $objAccesoDatos->prepararConsulta("INSERT INTO mesas (numero, estadoMesa, nombre, cuenta) VALUES (:numero, :estadoMesa, :nombre, :cuenta)");
         $consulta->bindValue(':numero', $this->numero, PDO::PARAM_STR);
         $consulta->bindValue(':estadoMesa', $this->estadoMesa, PDO::PARAM_STR);
         $consulta->bindValue(':nombre', $this->nombre, PDO::PARAM_STR);
+        $consulta->bindValue(':cuenta', $this->cuenta, PDO::PARAM_INT);
         $consulta->execute();
 
         return $objAccesoDatos->obtenerUltimoId();
