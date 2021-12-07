@@ -49,17 +49,16 @@ class Usuario
 
         return $consulta->fetchObject('Usuario');
     }
-    
-    public static function obtenerPuestoUsuario($puesto)
+
+    public static function obtenerUsuarioNombre($nombre)
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDatos->prepararConsulta("SELECT idUser, nombre, apellido, mail, clave, puesto, estado, idPuesto, idEstado FROM usuarios WHERE puesto = :puesto");
-        $consulta->bindValue(':puesto', $puesto, PDO::PARAM_INT);
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT idUser, nombre, apellido, mail, clave, puesto, estado, idPuesto, idEstado FROM usuarios WHERE nombre = :nombre");
+        $consulta->bindValue(':nombre', $nombre, PDO::PARAM_STR);
         $consulta->execute();
 
         return $consulta->fetchObject('Usuario');
     }
-
 
     public function modificarUsuario($idUser)
     {
@@ -90,13 +89,12 @@ class Usuario
 
     public function Mostrar()
     {
-        echo "---- USUARIO ----"."\n\n";
-        echo "Id: ".$this->idUser."\n\n";
-        echo "Nombre: ".$this->nombre."\n\n";
-        echo "Apellido: ".$this->apellido."\n\n";
-        echo "Mail: ".$this->mail."\n\n";
-        echo "Puesto: ".$this->puesto."\n\n";
-        echo "Estado: ".$this->estado."\n\n";
+        echo "---- USUARIO ----"."\n";
+        echo "Nombre: ".$this->nombre."\n";
+        echo "Apellido: ".$this->apellido."\n";
+        echo "Mail: ".$this->mail."\n";
+        echo "Puesto: ".$this->puesto."\n";
+        echo "Estado: ".$this->estado."\n";
     }
 
     public static function Listar($lista)
@@ -127,6 +125,36 @@ class Usuario
             }
         }
         return FALSE;
+    }
+
+    public static function obtenerNombre($usr)
+    {
+        $lista = Usuario::obtenerTodos();
+        foreach($lista as $u)
+        {
+            if($u->idUser == $usr)
+            {
+                $nombre = $u->nombre;
+
+                return $nombre;
+            }
+        }
+        return "El nombre no existe";
+    }
+
+    public static function obtenerPuesto($usr)
+    {
+        $lista = Usuario::obtenerTodos();
+        foreach($lista as $u)
+        {
+            if($u->idUser == $usr)
+            {
+                $puesto = $u->puesto;
+
+                return $puesto;
+            }
+        }
+        return "El puesto no existe";
     }
 
     public function ValidarPuesto($p)

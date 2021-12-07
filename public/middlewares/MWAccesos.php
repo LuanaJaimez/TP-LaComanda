@@ -55,7 +55,6 @@ class MWAccesos
         if(!empty($header))
         {
             $token = trim(explode("Bearer", $header)[1]);
-            var_dump($token);
             $data = AutentificadorJWT::ObtenerData($token);
             if ($data->puesto == "Mozo" || $data->puesto == "Socio")
             {

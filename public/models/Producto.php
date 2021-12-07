@@ -34,7 +34,17 @@ class Producto{
         return $consulta->fetchAll(PDO::FETCH_CLASS, 'Producto');
     }
 
-    public static function obtenerProducto($idProduc)
+    public static function obtenerProducto($nombre)
+    {
+        $objAccesoDatos = AccesoDatos::obtenerInstancia();
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT idProduc, nombre, precio, tipo, perfilEmpleado, idPuesto, puesto FROM productos WHERE nombre = :nombre");
+        $consulta->bindValue(':nombre', $nombre, PDO::PARAM_STR);
+        $consulta->execute();
+
+        return $consulta->fetchObject('Producto');
+    }
+
+    public static function obtenerProductoId($idProduc)
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
         $consulta = $objAccesoDatos->prepararConsulta("SELECT idProduc, nombre, precio, tipo, perfilEmpleado, idPuesto, puesto FROM productos WHERE idProduc = :idProduc");
@@ -79,7 +89,6 @@ class Producto{
     public function Mostrar()
     {
         echo "---- PRODUCTO ----"."\n";
-        echo "Id: ".$this->idProduc."\n";
         echo "Nombre: ".$this->nombre."\n";
         echo "Tipo: ".$this->tipo."\n";
         echo "Precio: ".$this->precio."\n";

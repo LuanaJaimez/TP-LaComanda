@@ -1,17 +1,21 @@
 <?php
 require_once './db/AccesoDatos.php';
+require_once './models/Usuario.php';
 
 class Mesa{
+    public $id;
     public $numero;
     public $estadoMesa;
-    public $idUser;
+    public $cuenta;
+    public $nombre;
 
     public function crearMesa()
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDatos->prepararConsulta("INSERT INTO mesas (estadoMesa, idUser) VALUES (:estadoMesa, :idUser)");
+        $consulta = $objAccesoDatos->prepararConsulta("INSERT INTO mesas (numero, estadoMesa, nombre, cuenta) VALUES (:numero, :estadoMesa, :nombre)");
+        $consulta->bindValue(':numero', $this->numero, PDO::PARAM_STR);
         $consulta->bindValue(':estadoMesa', $this->estadoMesa, PDO::PARAM_STR);
-        $consulta->bindValue(':idUser', $this->idUser, PDO::PARAM_INT);
+        $consulta->bindValue(':nombre', $this->nombre, PDO::PARAM_STR);
         $consulta->execute();
 
         return $objAccesoDatos->obtenerUltimoId();
@@ -20,37 +24,86 @@ class Mesa{
     public static function obtenerTodos()
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDatos->prepararConsulta("SELECT numero, estadoMesa, idUser FROM mesas");
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT id, numero, estadoMesa, nombre, cuenta FROM mesas");
         $consulta->execute();
 
         return $consulta->fetchAll(PDO::FETCH_CLASS, 'Mesa');
     }
 
-    public static function obtenerMesa($numero)
+    public static function obtenerMesaNumero($numero)
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDatos->prepararConsulta("SELECT numero, estadoMesa, idUser FROM mesas WHERE numero = :numero");
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT id, numero, estadoMesa, nombre, cuenta FROM mesas WHERE numero = :numero");
         $consulta->bindValue(':numero', $numero, PDO::PARAM_INT);
         $consulta->execute();
 
         return $consulta->fetchObject('Mesa');
     }
 
-    public function modificarMesa($numero)
+    public static function obtenerMesa($id)
+    {
+        $objAccesoDatos = AccesoDatos::obtenerInstancia();
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT id, numero, estadoMesa, nombre FROM mesas WHERE id = :id");
+        $consulta->bindValue(':id', $id, PDO::PARAM_INT);
+        $consulta->execute();
+
+        return $consulta->fetchObject('Mesa');
+    }
+
+    public static function obtenerEstados()
+    {
+        $objAccesoDatos = AccesoDatos::obtenerInstancia();
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT numero as num, estadoMesa FROM mesas");
+        $consulta->execute();
+
+        return $consulta->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    public static function actualizarEstado($numero, $estadoMesa, $id)
     {
         $objAccesoDato = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDato->prepararConsulta("UPDATE mesas SET estadoMesa = :estadoMesa, idUser = :idUser WHERE numero = :numero");
-        $consulta->bindValue(':numero', $numero, PDO::PARAM_INT);
+        $consulta = $objAccesoDato->prepararConsulta("UPDATE mesas SET estadoMesa = :estadoMesa WHERE numero = :numero AND id = :id");
+        $consulta->bindValue(':numero', $numero, PDO::PARAM_STR);
+        $consulta->bindValue(':estadoMesa',$estadoMesa, PDO::PARAM_STR);
+        $consulta->bindValue(':id',$id, PDO::PARAM_INT);
+        
+        return $consulta->execute(); 
+    }
+
+    public function modificarMesa($id)
+    {
+        $objAccesoDato = AccesoDatos::obtenerInstancia();
+        $consulta = $objAccesoDato->prepararConsulta("UPDATE mesas SET estadoMesa = :estadoMesa, nombre = :nombre, cuenta = :cuenta WHERE id = :id");
+        $consulta->bindValue(':id', $id, PDO::PARAM_INT);
         $consulta->bindValue(':estadoMesa', $this->estadoMesa, PDO::PARAM_STR);
-        $consulta->bindValue(':idUser', $this->idUser, PDO::PARAM_INT);
+        $consulta->bindValue(':nombre', $this->nombre, PDO::PARAM_STR);
+        $consulta->bindValue(':cuenta', $this->cuenta, PDO::PARAM_INT);
         $consulta->execute();
     }
 
-    public function borrarMesa($numero)
+    public static function obtenerConsumosMesa($codigo)
     {
         $objAccesoDato = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDato->prepararConsulta("UPDATE mesas WHERE numero = :numero");
-        $consulta->bindValue(':numero', $numero, PDO::PARAM_INT);
+        $consulta = $objAccesoDato->prepararConsulta("SELECT SUM(pedidos.total) FROM pedidos, productos WHERE pedidos.codigo = :codigo AND pedidos.datosProducto = productos.nombre");
+        $consulta->bindValue(':codigo', $codigo, PDO::PARAM_STR);
+        $consulta->execute();
+        return $consulta->fetchAll();
+    }
+
+    public static function cargarCuentaMesa($id, $cuenta)
+    {
+        $objAccesoDato = AccesoDatos::obtenerInstancia();
+        $consulta = $objAccesoDato->prepararConsulta("UPDATE mesas SET cuenta = $cuenta WHERE id = :id");
+        $consulta->bindValue(':id', $id, PDO::PARAM_INT);
+        $consulta->execute();
+    }
+
+    public function borrarMesa($id)
+    {
+        $objAccesoDato = AccesoDatos::obtenerInstancia();
+        $consulta = $objAccesoDato->prepararConsulta("UPDATE mesas SET estadoMesa = :estadoMesa WHERE id = :id");
+        $consulta->bindValue(':id', $id, PDO::PARAM_INT);
+        $consulta->bindValue(':estadoMesa', "Cerrada", PDO::PARAM_STR);
         $consulta->execute();
     }
 
@@ -59,7 +112,7 @@ class Mesa{
         echo "---- MESA ----"."\n\n";
         echo "Numero: ".$this->numero."\n\n";
         echo "Estado: ".$this->estadoMesa."\n\n";
-        echo "Usuario: ".$this->idUser."\n\n";
+        echo "Usuario: ".$this->nombre."\n\n";
     }
 
     public static function Listar($lista)
@@ -70,9 +123,9 @@ class Mesa{
         }
     }
 
-    public function ValidarEstado()
+    public function ValidarEstado($e)
     {
-        switch($this->estadoMesa)
+        switch($e)
         {
             case 'Cerrada':
                 return 1;
@@ -88,38 +141,13 @@ class Mesa{
         }
     }
 
-    public static function ActualizarMesa($estadoMesa, $idMesa)
+    public static function ValidarUser($nombre)
     {
-        $estadoMesa = $estadoMesa; 
-        $idMesa = $idMesa;
-        $e = new Mesa();
-        
-        $m = Mesa::obtenerMesa($idMesa);
-        $e->ValidarEstado($estadoMesa);
-        if($estadoMesa != NULL && $idMesa != NULL)
-        { 
-          if($e > 0 && $e < 5)
-          {
-              $m->estadoMesa = $estadoMesa;
-              $m->modificar();
-              echo 'Mesa actualizada';
-              return TRUE;
-          }
-          else
-          {
-              echo 'Error al actualizar';  
-          }
-        }
-        return FALSE;
-      }
-
-    public static function ValidarUser($id)
-    {        
         $lista = Usuario::obtenerTodos();
 
         foreach ($lista as $u)
         {
-            if($id == $u->idUser)
+            if($u->nombre == $nombre)
             {
                 if($u->idPuesto == 4 || $u->idPuesto == 5)
                 {
@@ -129,6 +157,13 @@ class Mesa{
         }
         echo "El usuario debe ser un Mozo o Socio" . "\n";
         return FALSE;
+    }
+
+    public static function CrearNumero()
+    {
+        $caracteres = '0123456789abcdefghijklmnopqrstuvwxyz';
+        $numero = substr(str_shuffle($caracteres), 0, 5);
+        return $numero;
     }
 }
 

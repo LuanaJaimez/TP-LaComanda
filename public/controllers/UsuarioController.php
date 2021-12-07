@@ -1,6 +1,7 @@
 <?php
 require_once './models/Usuario.php';
 require_once './interfaces/IApiUsable.php';
+require_once './controllers/ChangelogController.php';
 
 class UsuarioController extends Usuario implements IApiUsable
 {
@@ -28,6 +29,8 @@ class UsuarioController extends Usuario implements IApiUsable
 
         $usr->crearUsuario();
 
+        ChangelogController::CargarUno("usuarios",$usr->nombre,$usr->puesto,"Cargar datos","Datos de un usuario");
+
         $payload = json_encode(array("mensaje" => "Usuario creado con eusrito"));
 
         $usr->Mostrar();
@@ -44,6 +47,8 @@ class UsuarioController extends Usuario implements IApiUsable
         $usuario = Usuario::obtenerUsuario($usr);
         $payload = json_encode($usuario);
 
+        ChangelogController::CargarUno("usuarios",$usuario->nombre,0,"Obtener datos","Datos de un usuario");
+
         $response->getBody()->write($payload);
         return $response
           ->withHeader('Content-Type', 'application/json');
@@ -53,6 +58,8 @@ class UsuarioController extends Usuario implements IApiUsable
     {
         $lista = Usuario::obtenerTodos();
         $payload = json_encode(array("listaUsuario" => $lista));
+
+        ChangelogController::CargarUno("usuarios",0,0,"Obtener datos","Datos de todos los usuarios");
 
         $response->getBody()->write($payload);
         return $response
@@ -65,6 +72,8 @@ class UsuarioController extends Usuario implements IApiUsable
 
         $idUser = $parametros['idUser'];
         Usuario::modificarUsuario($idUser);
+
+        ChangelogController::CargarUno("usuarios",0,$idUser,"Modificar datos","Modificacion de un usuario");
 
         $payload = json_encode(array("mensaje" => "Usuario modificado con eusrito"));
 
@@ -79,6 +88,8 @@ class UsuarioController extends Usuario implements IApiUsable
 
         $usuarioId = $parametros['idUser'];
         Usuario::borrarUsuario($usuarioId);
+
+        ChangelogController::CargarUno("usuarios",0,0,"Borrar datos","Baja de un usuario");
 
         $payload = json_encode(array("mensaje" => "Usuario borrado con eusrito"));
 
@@ -97,13 +108,13 @@ class UsuarioController extends Usuario implements IApiUsable
       $usr->puesto = $parametros['puesto'];
       $usr->clave = $parametros['clave'];
 
-      var_dump($usr);
-
       if(Usuario::ValidarUsuario($usr))
       {
         $datos = array('idUser' => $usr->idUser,'nombre' => $usr->nombre, 'puesto' => $usr->puesto, 'clave' => $usr->clave);
         $token = AutentificadorJWT::CrearToken($datos);
         $payload = json_encode(array('jwt' => $token));
+
+        ChangelogController::CargarUno("usuarios",$usr->nombre,$usr->puesto,"Login","Login de un usuario");
       }
       else
       {

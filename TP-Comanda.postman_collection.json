@@ -6,104 +6,39 @@
 	},
 	"item": [
 		{
-			"name": "http://localhost:666/usuarios/login",
+			"name": "http://localhost:666/mesas",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
-				"method": "POST",
+				"method": "GET",
 				"header": [],
 				"body": {
 					"mode": "formdata",
 					"formdata": [
 						{
 							"key": "nombre",
-							"value": "Esteban",
+							"value": "Carla",
 							"type": "text"
 						},
 						{
 							"key": "apellido",
-							"value": "Sanchez",
-							"type": "text"
-						},
-						{
-							"key": "puesto",
-							"value": "Socio",
-							"type": "text"
-						},
-						{
-							"key": "idUser",
-							"value": "2",
-							"type": "text"
-						},
-						{
-							"key": "clave",
-							"value": "1e43t6",
-							"type": "text"
-						}
-					]
-				},
-				"url": {
-					"raw": "http://localhost:666/usuarios/login",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "666",
-					"path": [
-						"usuarios",
-						"login"
-					],
-					"query": [
-						{
-							"key": "idUser",
-							"value": "2",
-							"disabled": true
-						},
-						{
-							"key": "clave",
-							"value": "1e43t6",
-							"disabled": true
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "http://localhost:666/usuarios/alta",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MzgxOTE2NjYsImV4cCI6MTYzODI1MTY2NiwiYXVkIjoiMGIzMzIwM2I4NmI2MmRmMTg4MzIyMTRkOTUxZWIxNDM0MzlkOWYzOSIsImRhdGEiOnsiaWRVc2VyIjoiMiIsIm5vbWJyZSI6IkVzdGViYW4iLCJwdWVzdG8iOiJTb2NpbyIsImNsYXZlIjoiMWU0M3Q2In0sImFwcCI6IlRlc3QgSldUIn0.CbKhuxa9oudAUqENFH5wYewNFEgnENwyNntwcVyZrGk",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "nombre",
-							"value": "Lucia",
-							"type": "text"
-						},
-						{
-							"key": "apellido",
-							"value": "perez",
+							"value": "Lopez",
 							"type": "text"
 						},
 						{
 							"key": "mail",
-							"value": "lucia@perez",
+							"value": "lopezcarla@mail.com",
 							"type": "text"
 						},
 						{
 							"key": "clave",
-							"value": "1r53tu67",
+							"value": "122352",
 							"type": "text"
 						},
 						{
 							"key": "puesto",
-							"value": "Mozo",
+							"value": "Cocinero",
 							"type": "text"
 						},
 						{
@@ -112,256 +47,25 @@
 							"type": "text"
 						},
 						{
-							"key": "idPuesto",
-							"value": "4",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "idEstado",
-							"value": "6",
+							"key": "fechaBaja",
+							"value": "",
 							"type": "text",
 							"disabled": true
 						}
 					]
 				},
 				"url": {
-					"raw": "http://localhost:666/usuarios/alta",
+					"raw": "http://localhost:666/mesas",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "666",
 					"path": [
-						"usuarios",
-						"alta"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "http://localhost:666/usuarios/traer",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:666/usuarios/traer",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "666",
-					"path": [
-						"usuarios",
-						"traer"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "http://localhost:666/mesas/traer",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:666/mesas/traer",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "666",
-					"path": [
-						"mesas",
-						"traer"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "http://localhost:666/mesas/alta",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MzgxOTE2NjYsImV4cCI6MTYzODI1MTY2NiwiYXVkIjoiMGIzMzIwM2I4NmI2MmRmMTg4MzIyMTRkOTUxZWIxNDM0MzlkOWYzOSIsImRhdGEiOnsiaWRVc2VyIjoiMiIsIm5vbWJyZSI6IkVzdGViYW4iLCJwdWVzdG8iOiJTb2NpbyIsImNsYXZlIjoiMWU0M3Q2In0sImFwcCI6IlRlc3QgSldUIn0.CbKhuxa9oudAUqENFH5wYewNFEgnENwyNntwcVyZrGk",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "estadoMesa",
-							"value": "Esperando",
-							"type": "text"
-						},
-						{
-							"key": "idUser",
-							"value": "3",
-							"type": "text"
-						}
+						"mesas"
 					]
 				},
-				"url": {
-					"raw": "http://localhost:666/mesas/alta",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "666",
-					"path": [
-						"mesas",
-						"alta"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "http://localhost:666/productos/alta",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MzgxOTE2NjYsImV4cCI6MTYzODI1MTY2NiwiYXVkIjoiMGIzMzIwM2I4NmI2MmRmMTg4MzIyMTRkOTUxZWIxNDM0MzlkOWYzOSIsImRhdGEiOnsiaWRVc2VyIjoiMiIsIm5vbWJyZSI6IkVzdGViYW4iLCJwdWVzdG8iOiJTb2NpbyIsImNsYXZlIjoiMWU0M3Q2In0sImFwcCI6IlRlc3QgSldUIn0.CbKhuxa9oudAUqENFH5wYewNFEgnENwyNntwcVyZrGk",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "nombre",
-							"value": "Fideos",
-							"type": "text"
-						},
-						{
-							"key": "precio",
-							"value": "320",
-							"type": "text"
-						},
-						{
-							"key": "stock",
-							"value": "8",
-							"type": "text"
-						},
-						{
-							"key": "tipo",
-							"value": "Comida",
-							"type": "text"
-						},
-						{
-							"key": "perfilEmpleado",
-							"value": "4",
-							"type": "text"
-						},
-						{
-							"key": "idPuesto",
-							"value": "3",
-							"type": "text",
-							"disabled": true
-						},
-						{
-							"key": "puesto",
-							"value": "Cocinero",
-							"type": "text",
-							"disabled": true
-						}
-					]
-				},
-				"url": {
-					"raw": "http://localhost:666/productos/alta",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "666",
-					"path": [
-						"productos",
-						"alta"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "http://localhost:666/pedidos/alta",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2MzgxOTE2NjYsImV4cCI6MTYzODI1MTY2NiwiYXVkIjoiMGIzMzIwM2I4NmI2MmRmMTg4MzIyMTRkOTUxZWIxNDM0MzlkOWYzOSIsImRhdGEiOnsiaWRVc2VyIjoiMiIsIm5vbWJyZSI6IkVzdGViYW4iLCJwdWVzdG8iOiJTb2NpbyIsImNsYXZlIjoiMWU0M3Q2In0sImFwcCI6IlRlc3QgSldUIn0.CbKhuxa9oudAUqENFH5wYewNFEgnENwyNntwcVyZrGk",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "idMesa",
-							"value": "2",
-							"type": "text"
-						},
-						{
-							"key": "idUser",
-							"value": "3",
-							"type": "text"
-						},
-						{
-							"key": "datosProducto",
-							"value": "3",
-							"type": "text"
-						},
-						{
-							"key": "cantidad",
-							"value": "1",
-							"type": "text"
-						},
-						{
-							"key": "foto",
-							"type": "file",
-							"src": "/C:/Users/luana/Pictures/Icons/Toma4025-Rumax-Camera.ico"
-						}
-					]
-				},
-				"url": {
-					"raw": "http://localhost:666/pedidos/alta",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "666",
-					"path": [
-						"pedidos",
-						"alta"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "http://localhost:666/pedidos/traer",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:666/pedidos/traer",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "666",
-					"path": [
-						"pedidos",
-						"traer"
-					]
-				}
+				"description": "Error"
 			},
 			"response": []
 		}
