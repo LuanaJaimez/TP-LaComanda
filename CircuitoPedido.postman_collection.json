@@ -317,7 +317,7 @@
 						},
 						{
 							"key": "puesto",
-							"value": "Bartender",
+							"value": "Cocinero",
 							"type": "text"
 						},
 						{
@@ -520,6 +520,171 @@
 					"path": [
 						"pdf",
 						"guardarEncuesta"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:666/encuesta/mejoresComentarios",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2Mzg5MTA5ODgsImV4cCI6MTYzODk3MDk4OCwiYXVkIjoiMGIzMzIwM2I4NmI2MmRmMTg4MzIyMTRkOTUxZWIxNDM0MzlkOWYzOSIsImRhdGEiOnsiaWRVc2VyIjoiMSIsIm5vbWJyZSI6Ik1hdGlhcyIsInB1ZXN0byI6IlNvY2lvIiwiY2xhdmUiOiIkMnkkMTAkcDBPVjhsZTRaWUZGUjVoWWY1VGpsLlBvQjFWSkVzT2p3WkpTd1ZGLmwyN3h3SUw3dUtcL1dtIn0sImFwcCI6IlRlc3QgSldUIn0.0ggGrBfUqecNAlV84xmNhfinVwvURmwSucpE9boUATQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:666/encuesta/mejoresComentarios",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"encuesta",
+						"mejoresComentarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:666/estadisticas/mesas",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2Mzg5MDUyOTMsImV4cCI6MTYzODk2NTI5MywiYXVkIjoiMGIzMzIwM2I4NmI2MmRmMTg4MzIyMTRkOTUxZWIxNDM0MzlkOWYzOSIsImRhdGEiOnsiaWRVc2VyIjoiMSIsIm5vbWJyZSI6Ik1hdGlhcyIsInB1ZXN0byI6IlNvY2lvIiwiY2xhdmUiOiIkMnkkMTAkcDBPVjhsZTRaWUZGUjVoWWY1VGpsLlBvQjFWSkVzT2p3WkpTd1ZGLmwyN3h3SUw3dUtcL1dtIn0sImFwcCI6IlRlc3QgSldUIn0.BL8-UYyhjKInEgwS7lKVutxLISse3XPKRwXKbU1QSH8",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:666/estadisticas/mesas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"estadisticas",
+						"mesas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:666/pdf/guardarUsuario",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2Mzg4NDMyODcsImV4cCI6MTYzODkwMzI4NywiYXVkIjoiMGIzMzIwM2I4NmI2MmRmMTg4MzIyMTRkOTUxZWIxNDM0MzlkOWYzOSIsImRhdGEiOnsiaWRVc2VyIjoiMSIsIm5vbWJyZSI6Ik1hdGlhcyIsInB1ZXN0byI6IlNvY2lvIiwiY2xhdmUiOiIkMnkkMTAkcDBPVjhsZTRaWUZGUjVoWWY1VGpsLlBvQjFWSkVzT2p3WkpTd1ZGLmwyN3h3SUw3dUtcL1dtIn0sImFwcCI6IlRlc3QgSldUIn0.WO2zuhMdzB62_EYdlFAG4P7D6z4CY2_ZSYvizu8ZE4s",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://localhost:666/pdf/guardarUsuario",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"pdf",
+						"guardarUsuario"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:666/pdf/guardarProducto",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:666/pdf/guardarProducto",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"pdf",
+						"guardarProducto"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:666/pdf/guardarCSV",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:666/pdf/guardarCSV",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"pdf",
+						"guardarCSV"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:666/pdf/guardarCSVBD",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:666/pdf/guardarCSVBD",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"pdf",
+						"guardarCSVBD"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:666/pdf/guardarCSVEnc",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:666/pdf/guardarCSVEnc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"pdf",
+						"guardarCSVEnc"
 					]
 				}
 			},

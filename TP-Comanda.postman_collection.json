@@ -6,34 +6,455 @@
 	},
 	"item": [
 		{
-			"name": "http://localhost:666/mesas",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
+			"name": "http://localhost:666/usuarios/login",
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "formdata",
 					"formdata": [
 						{
 							"key": "nombre",
-							"value": "Carla",
+							"value": "Matias",
 							"type": "text"
 						},
 						{
 							"key": "apellido",
-							"value": "Lopez",
+							"value": "Gonzalez",
 							"type": "text"
 						},
 						{
-							"key": "mail",
-							"value": "lopezcarla@mail.com",
+							"key": "puesto",
+							"value": "Socio",
+							"type": "text"
+						},
+						{
+							"key": "idUser",
+							"value": "1",
 							"type": "text"
 						},
 						{
 							"key": "clave",
-							"value": "122352",
+							"value": "$2y$10$p0OV8le4ZYFFR5hYf5Tjl.PoB1VJEsOjwZJSwVF.l27xwIL7uK/Wm",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:666/usuarios/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"usuarios",
+						"login"
+					],
+					"query": [
+						{
+							"key": "idUser",
+							"value": "2",
+							"disabled": true
+						},
+						{
+							"key": "clave",
+							"value": "1e43t6",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:666/usuarios/alta",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2Mzg1NTYxNTcsImV4cCI6MTYzODYxNjE1NywiYXVkIjoiMGIzMzIwM2I4NmI2MmRmMTg4MzIyMTRkOTUxZWIxNDM0MzlkOWYzOSIsImRhdGEiOnsiaWRVc2VyIjoiMiIsIm5vbWJyZSI6IkVzdGViYW4iLCJwdWVzdG8iOiJTb2NpbyIsImNsYXZlIjoiMWU0M3Q2In0sImFwcCI6IlRlc3QgSldUIn0.onwDy74w8VL5UsqOH_wAts6MSft8UDt2mfodm2EvODo",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nombre",
+							"value": "Ricardo",
+							"type": "text"
+						},
+						{
+							"key": "apellido",
+							"value": "Flores",
+							"type": "text"
+						},
+						{
+							"key": "mail",
+							"value": "floresricardo@mail.com",
+							"type": "text"
+						},
+						{
+							"key": "clave",
+							"value": "3uet54",
+							"type": "text"
+						},
+						{
+							"key": "puesto",
+							"value": "Bartender",
+							"type": "text"
+						},
+						{
+							"key": "estado",
+							"value": "Disponible",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:666/usuarios/alta",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"usuarios",
+						"alta"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:666/usuarios/traer",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:666/usuarios/traer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"usuarios",
+						"traer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:666/mesas/traer",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:666/mesas/traer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"mesas",
+						"traer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:666/mesas/alta",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2Mzg4MDMxNjIsImV4cCI6MTYzODg2MzE2MiwiYXVkIjoiMGIzMzIwM2I4NmI2MmRmMTg4MzIyMTRkOTUxZWIxNDM0MzlkOWYzOSIsImRhdGEiOnsiaWRVc2VyIjoiNCIsIm5vbWJyZSI6IkNhcmxhIiwicHVlc3RvIjoiTW96byIsImNsYXZlIjoiJDJ5JDEwJHJCYjB6bGY5dDkzZmhWREdSSE9KcHVPM2c0dVJQOFJ6Z1dNejI1WnBabEs4NWNSTnQ0VU5xIn0sImFwcCI6IlRlc3QgSldUIn0.qiKufj5bttGDgoyPC8hqqtdq9kkcaQulmqxyFAXENR0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nombre",
+							"value": "Lucas",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:666/mesas/alta",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"mesas",
+						"alta"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:666/productos/alta",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2Mzg1NTYxNTcsImV4cCI6MTYzODYxNjE1NywiYXVkIjoiMGIzMzIwM2I4NmI2MmRmMTg4MzIyMTRkOTUxZWIxNDM0MzlkOWYzOSIsImRhdGEiOnsiaWRVc2VyIjoiMiIsIm5vbWJyZSI6IkVzdGViYW4iLCJwdWVzdG8iOiJTb2NpbyIsImNsYXZlIjoiMWU0M3Q2In0sImFwcCI6IlRlc3QgSldUIn0.onwDy74w8VL5UsqOH_wAts6MSft8UDt2mfodm2EvODo",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nombre",
+							"value": "Budweiser",
+							"type": "text"
+						},
+						{
+							"key": "precio",
+							"value": "140",
+							"type": "text"
+						},
+						{
+							"key": "tipo",
+							"value": "Cerveza",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:666/productos/alta",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"productos",
+						"alta"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:666/pedidos/alta",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2Mzg4MDMxNjIsImV4cCI6MTYzODg2MzE2MiwiYXVkIjoiMGIzMzIwM2I4NmI2MmRmMTg4MzIyMTRkOTUxZWIxNDM0MzlkOWYzOSIsImRhdGEiOnsiaWRVc2VyIjoiNCIsIm5vbWJyZSI6IkNhcmxhIiwicHVlc3RvIjoiTW96byIsImNsYXZlIjoiJDJ5JDEwJHJCYjB6bGY5dDkzZmhWREdSSE9KcHVPM2c0dVJQOFJ6Z1dNejI1WnBabEs4NWNSTnQ0VU5xIn0sImFwcCI6IlRlc3QgSldUIn0.qiKufj5bttGDgoyPC8hqqtdq9kkcaQulmqxyFAXENR0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "idMesa",
+							"value": "9",
+							"type": "text"
+						},
+						{
+							"key": "tipoProducto",
+							"value": "Trago",
+							"type": "text"
+						},
+						{
+							"key": "tiempo",
+							"value": "15",
+							"type": "text"
+						},
+						{
+							"key": "datosProducto",
+							"value": "Black russian",
+							"type": "text"
+						},
+						{
+							"key": "cantidad",
+							"value": "2",
+							"type": "text"
+						},
+						{
+							"key": "foto",
+							"type": "file",
+							"src": "/C:/Users/luana/Pictures/Icons/aim.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:666/pedidos/alta",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"pedidos",
+						"alta"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:666/pedidos/traer",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:666/pedidos/traer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"pedidos",
+						"traer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:666/mesas/actualizarEstado",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2Mzg5MDk3OTcsImV4cCI6MTYzODk2OTc5NywiYXVkIjoiMGIzMzIwM2I4NmI2MmRmMTg4MzIyMTRkOTUxZWIxNDM0MzlkOWYzOSIsImRhdGEiOnsiaWRVc2VyIjoiNSIsIm5vbWJyZSI6Ikp1bGlhIiwicHVlc3RvIjoiTW96byIsImNsYXZlIjoiJDJ5JDEwJFFoVUdlMnRrcmg4MXNYNGxZNkx1YnVGVkM2SG05azYxbmhOelVzc2NcL1BYQldYLkVtbUtNcSJ9LCJhcHAiOiJUZXN0IEpXVCJ9.VD5qu0oPRRZvubUH94NIj3_mZ5go4hk9-OnceP1vNIM",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "estado",
+							"value": "Comiendo",
+							"type": "text"
+						},
+						{
+							"key": "id",
+							"value": "10",
+							"type": "text"
+						},
+						{
+							"key": "numero",
+							"value": "fsedz",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:666/mesas/actualizarEstado",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"mesas",
+						"actualizarEstado"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:666/pedidos/agregar",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2Mzg4MDMxNjIsImV4cCI6MTYzODg2MzE2MiwiYXVkIjoiMGIzMzIwM2I4NmI2MmRmMTg4MzIyMTRkOTUxZWIxNDM0MzlkOWYzOSIsImRhdGEiOnsiaWRVc2VyIjoiNCIsIm5vbWJyZSI6IkNhcmxhIiwicHVlc3RvIjoiTW96byIsImNsYXZlIjoiJDJ5JDEwJHJCYjB6bGY5dDkzZmhWREdSSE9KcHVPM2c0dVJQOFJ6Z1dNejI1WnBabEs4NWNSTnQ0VU5xIn0sImFwcCI6IlRlc3QgSldUIn0.qiKufj5bttGDgoyPC8hqqtdq9kkcaQulmqxyFAXENR0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "codigo",
+							"value": "1k86p",
+							"type": "text"
+						},
+						{
+							"key": "producto",
+							"value": "Quilmes",
+							"type": "text"
+						},
+						{
+							"key": "tipoProducto",
+							"value": "Cerveza",
+							"type": "text"
+						},
+						{
+							"key": "cantidad",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "tiempo",
+							"value": "5",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:666/pedidos/agregar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"pedidos",
+						"agregar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:666/pedidos/actualizar",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2Mzg4MjE4MTEsImV4cCI6MTYzODg4MTgxMSwiYXVkIjoiMGIzMzIwM2I4NmI2MmRmMTg4MzIyMTRkOTUxZWIxNDM0MzlkOWYzOSIsImRhdGEiOnsiaWRVc2VyIjoiOCIsIm5vbWJyZSI6IlN1c2FuYSIsInB1ZXN0byI6IkNvY2luZXJvIiwiY2xhdmUiOiIkMnkkMTAkcHJIZmUzTU1UUDNac0FQNXVEZWlUZWQxemRZMVQySUw5c0NXM1hYNWxMNnB3OUQ1eHFacGEifSwiYXBwIjoiVGVzdCBKV1QifQ.4jKop7L8b9Z6xfmp0MReA7zYF3roCYkSMGwoYmqLra0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "codigo",
+							"value": "rapju",
+							"type": "text"
+						},
+						{
+							"key": "estado",
+							"value": "En preparacion",
 							"type": "text"
 						},
 						{
@@ -42,30 +463,580 @@
 							"type": "text"
 						},
 						{
-							"key": "estado",
-							"value": "Disponible",
+							"key": "tiempo",
+							"value": "15",
 							"type": "text"
-						},
-						{
-							"key": "fechaBaja",
-							"value": "",
-							"type": "text",
-							"disabled": true
 						}
 					]
 				},
 				"url": {
-					"raw": "http://localhost:666/mesas",
+					"raw": "http://localhost:666/pedidos/actualizar",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "666",
 					"path": [
-						"mesas"
+						"pedidos",
+						"actualizar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:666/pedidos/1k86p",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2Mzg4MjE4MTEsImV4cCI6MTYzODg4MTgxMSwiYXVkIjoiMGIzMzIwM2I4NmI2MmRmMTg4MzIyMTRkOTUxZWIxNDM0MzlkOWYzOSIsImRhdGEiOnsiaWRVc2VyIjoiOCIsIm5vbWJyZSI6IlN1c2FuYSIsInB1ZXN0byI6IkNvY2luZXJvIiwiY2xhdmUiOiIkMnkkMTAkcHJIZmUzTU1UUDNac0FQNXVEZWlUZWQxemRZMVQySUw5c0NXM1hYNWxMNnB3OUQ1eHFacGEifSwiYXBwIjoiVGVzdCBKV1QifQ.4jKop7L8b9Z6xfmp0MReA7zYF3roCYkSMGwoYmqLra0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://localhost:666/pedidos/1k86p",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"pedidos",
+						"1k86p"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:666/pedidos/traerPorPuesto/Bartender",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2Mzg4MjE4MTEsImV4cCI6MTYzODg4MTgxMSwiYXVkIjoiMGIzMzIwM2I4NmI2MmRmMTg4MzIyMTRkOTUxZWIxNDM0MzlkOWYzOSIsImRhdGEiOnsiaWRVc2VyIjoiOCIsIm5vbWJyZSI6IlN1c2FuYSIsInB1ZXN0byI6IkNvY2luZXJvIiwiY2xhdmUiOiIkMnkkMTAkcHJIZmUzTU1UUDNac0FQNXVEZWlUZWQxemRZMVQySUw5c0NXM1hYNWxMNnB3OUQ1eHFacGEifSwiYXBwIjoiVGVzdCBKV1QifQ.4jKop7L8b9Z6xfmp0MReA7zYF3roCYkSMGwoYmqLra0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "codigo",
+							"value": "cm58w",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "estado",
+							"value": "En preparacion",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "puesto",
+							"value": "Cervecero",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "tiempo",
+							"value": "10",
+							"type": "text",
+							"disabled": true
+						}
 					]
 				},
-				"description": "Error"
+				"url": {
+					"raw": "http://localhost:666/pedidos/traerPorPuesto/Bartender",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"pedidos",
+						"traerPorPuesto",
+						"Bartender"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:666/pedidos/traerPendiente/Bartender",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2Mzg4MjE4MTEsImV4cCI6MTYzODg4MTgxMSwiYXVkIjoiMGIzMzIwM2I4NmI2MmRmMTg4MzIyMTRkOTUxZWIxNDM0MzlkOWYzOSIsImRhdGEiOnsiaWRVc2VyIjoiOCIsIm5vbWJyZSI6IlN1c2FuYSIsInB1ZXN0byI6IkNvY2luZXJvIiwiY2xhdmUiOiIkMnkkMTAkcHJIZmUzTU1UUDNac0FQNXVEZWlUZWQxemRZMVQySUw5c0NXM1hYNWxMNnB3OUQ1eHFacGEifSwiYXBwIjoiVGVzdCBKV1QifQ.4jKop7L8b9Z6xfmp0MReA7zYF3roCYkSMGwoYmqLra0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "codigo",
+							"value": "cm58w",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "estado",
+							"value": "En preparacion",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "puesto",
+							"value": "Cervecero",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "tiempo",
+							"value": "10",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:666/pedidos/traerPendiente/Bartender",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"pedidos",
+						"traerPendiente",
+						"Bartender"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:666/pedidos/foto",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2Mzg5MTA5ODgsImV4cCI6MTYzODk3MDk4OCwiYXVkIjoiMGIzMzIwM2I4NmI2MmRmMTg4MzIyMTRkOTUxZWIxNDM0MzlkOWYzOSIsImRhdGEiOnsiaWRVc2VyIjoiMSIsIm5vbWJyZSI6Ik1hdGlhcyIsInB1ZXN0byI6IlNvY2lvIiwiY2xhdmUiOiIkMnkkMTAkcDBPVjhsZTRaWUZGUjVoWWY1VGpsLlBvQjFWSkVzT2p3WkpTd1ZGLmwyN3h3SUw3dUtcL1dtIn0sImFwcCI6IlRlc3QgSldUIn0.0ggGrBfUqecNAlV84xmNhfinVwvURmwSucpE9boUATQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "codigo",
+							"value": "rapju",
+							"type": "text"
+						},
+						{
+							"key": "foto",
+							"type": "file",
+							"src": "/C:/Users/luana/Pictures/Icons/aimp 3.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:666/pedidos/foto",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"pedidos",
+						"foto"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:666/pedidos/demora",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2Mzg4NDMyODcsImV4cCI6MTYzODkwMzI4NywiYXVkIjoiMGIzMzIwM2I4NmI2MmRmMTg4MzIyMTRkOTUxZWIxNDM0MzlkOWYzOSIsImRhdGEiOnsiaWRVc2VyIjoiMSIsIm5vbWJyZSI6Ik1hdGlhcyIsInB1ZXN0byI6IlNvY2lvIiwiY2xhdmUiOiIkMnkkMTAkcDBPVjhsZTRaWUZGUjVoWWY1VGpsLlBvQjFWSkVzT2p3WkpTd1ZGLmwyN3h3SUw3dUtcL1dtIn0sImFwcCI6IlRlc3QgSldUIn0.WO2zuhMdzB62_EYdlFAG4P7D6z4CY2_ZSYvizu8ZE4s",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "codigo",
+							"value": "1k86p",
+							"type": "text"
+						},
+						{
+							"key": "numero",
+							"value": "0qudm",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:666/pedidos/demora",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"pedidos",
+						"demora"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:666/pedidos/pedidosDemora",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2Mzg4NDMyODcsImV4cCI6MTYzODkwMzI4NywiYXVkIjoiMGIzMzIwM2I4NmI2MmRmMTg4MzIyMTRkOTUxZWIxNDM0MzlkOWYzOSIsImRhdGEiOnsiaWRVc2VyIjoiMSIsIm5vbWJyZSI6Ik1hdGlhcyIsInB1ZXN0byI6IlNvY2lvIiwiY2xhdmUiOiIkMnkkMTAkcDBPVjhsZTRaWUZGUjVoWWY1VGpsLlBvQjFWSkVzT2p3WkpTd1ZGLmwyN3h3SUw3dUtcL1dtIn0sImFwcCI6IlRlc3QgSldUIn0.WO2zuhMdzB62_EYdlFAG4P7D6z4CY2_ZSYvizu8ZE4s",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://localhost:666/pedidos/pedidosDemora",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"pedidos",
+						"pedidosDemora"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:666/pedidos/actualizar",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2Mzg4MjE4MTEsImV4cCI6MTYzODg4MTgxMSwiYXVkIjoiMGIzMzIwM2I4NmI2MmRmMTg4MzIyMTRkOTUxZWIxNDM0MzlkOWYzOSIsImRhdGEiOnsiaWRVc2VyIjoiOCIsIm5vbWJyZSI6IlN1c2FuYSIsInB1ZXN0byI6IkNvY2luZXJvIiwiY2xhdmUiOiIkMnkkMTAkcHJIZmUzTU1UUDNac0FQNXVEZWlUZWQxemRZMVQySUw5c0NXM1hYNWxMNnB3OUQ1eHFacGEifSwiYXBwIjoiVGVzdCBKV1QifQ.4jKop7L8b9Z6xfmp0MReA7zYF3roCYkSMGwoYmqLra0",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "codigo",
+							"value": "2u6q1",
+							"type": "text"
+						},
+						{
+							"key": "estado",
+							"value": "Listo para servir",
+							"type": "text"
+						},
+						{
+							"key": "puesto",
+							"value": "Bartender",
+							"type": "text"
+						},
+						{
+							"key": "tiempo",
+							"value": "6",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:666/pedidos/actualizar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"pedidos",
+						"actualizar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:666/pedidos/traerListos/Mozo",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2Mzg4NDMyODcsImV4cCI6MTYzODkwMzI4NywiYXVkIjoiMGIzMzIwM2I4NmI2MmRmMTg4MzIyMTRkOTUxZWIxNDM0MzlkOWYzOSIsImRhdGEiOnsiaWRVc2VyIjoiMSIsIm5vbWJyZSI6Ik1hdGlhcyIsInB1ZXN0byI6IlNvY2lvIiwiY2xhdmUiOiIkMnkkMTAkcDBPVjhsZTRaWUZGUjVoWWY1VGpsLlBvQjFWSkVzT2p3WkpTd1ZGLmwyN3h3SUw3dUtcL1dtIn0sImFwcCI6IlRlc3QgSldUIn0.WO2zuhMdzB62_EYdlFAG4P7D6z4CY2_ZSYvizu8ZE4s",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://localhost:666/pedidos/traerListos/Mozo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"pedidos",
+						"traerListos",
+						"Mozo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:666/mesas/cerrarMesa",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2Mzg4NDMyODcsImV4cCI6MTYzODkwMzI4NywiYXVkIjoiMGIzMzIwM2I4NmI2MmRmMTg4MzIyMTRkOTUxZWIxNDM0MzlkOWYzOSIsImRhdGEiOnsiaWRVc2VyIjoiMSIsIm5vbWJyZSI6Ik1hdGlhcyIsInB1ZXN0byI6IlNvY2lvIiwiY2xhdmUiOiIkMnkkMTAkcDBPVjhsZTRaWUZGUjVoWWY1VGpsLlBvQjFWSkVzT2p3WkpTd1ZGLmwyN3h3SUw3dUtcL1dtIn0sImFwcCI6IlRlc3QgSldUIn0.WO2zuhMdzB62_EYdlFAG4P7D6z4CY2_ZSYvizu8ZE4s",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "codigo",
+							"value": "1k86p",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "estado",
+							"value": "Comiendo",
+							"type": "text"
+						},
+						{
+							"key": "puesto",
+							"value": "Cervecero",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "tiempo",
+							"value": "0",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "id",
+							"value": "9",
+							"type": "text"
+						},
+						{
+							"key": "numero",
+							"value": "cswom",
+							"type": "text"
+						},
+						{
+							"key": "estado",
+							"value": "Cerrada",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:666/mesas/cerrarMesa",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"mesas",
+						"cerrarMesa"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:666/mesas/obtenerCuenta",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2Mzg5MDk3OTcsImV4cCI6MTYzODk2OTc5NywiYXVkIjoiMGIzMzIwM2I4NmI2MmRmMTg4MzIyMTRkOTUxZWIxNDM0MzlkOWYzOSIsImRhdGEiOnsiaWRVc2VyIjoiNSIsIm5vbWJyZSI6Ikp1bGlhIiwicHVlc3RvIjoiTW96byIsImNsYXZlIjoiJDJ5JDEwJFFoVUdlMnRrcmg4MXNYNGxZNkx1YnVGVkM2SG05azYxbmhOelVzc2NcL1BYQldYLkVtbUtNcSJ9LCJhcHAiOiJUZXN0IEpXVCJ9.VD5qu0oPRRZvubUH94NIj3_mZ5go4hk9-OnceP1vNIM",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "codigo",
+							"value": "rapju",
+							"type": "text"
+						},
+						{
+							"key": "id",
+							"value": "10",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:666/mesas/obtenerCuenta",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"mesas",
+						"obtenerCuenta"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:666/mesas/estadoMesas",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2Mzg4NDMyODcsImV4cCI6MTYzODkwMzI4NywiYXVkIjoiMGIzMzIwM2I4NmI2MmRmMTg4MzIyMTRkOTUxZWIxNDM0MzlkOWYzOSIsImRhdGEiOnsiaWRVc2VyIjoiMSIsIm5vbWJyZSI6Ik1hdGlhcyIsInB1ZXN0byI6IlNvY2lvIiwiY2xhdmUiOiIkMnkkMTAkcDBPVjhsZTRaWUZGUjVoWWY1VGpsLlBvQjFWSkVzT2p3WkpTd1ZGLmwyN3h3SUw3dUtcL1dtIn0sImFwcCI6IlRlc3QgSldUIn0.WO2zuhMdzB62_EYdlFAG4P7D6z4CY2_ZSYvizu8ZE4s",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://localhost:666/mesas/estadoMesas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"mesas",
+						"estadoMesas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:666/encuesta/alta",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE2Mzg4NDMyODcsImV4cCI6MTYzODkwMzI4NywiYXVkIjoiMGIzMzIwM2I4NmI2MmRmMTg4MzIyMTRkOTUxZWIxNDM0MzlkOWYzOSIsImRhdGEiOnsiaWRVc2VyIjoiMSIsIm5vbWJyZSI6Ik1hdGlhcyIsInB1ZXN0byI6IlNvY2lvIiwiY2xhdmUiOiIkMnkkMTAkcDBPVjhsZTRaWUZGUjVoWWY1VGpsLlBvQjFWSkVzT2p3WkpTd1ZGLmwyN3h3SUw3dUtcL1dtIn0sImFwcCI6IlRlc3QgSldUIn0.WO2zuhMdzB62_EYdlFAG4P7D6z4CY2_ZSYvizu8ZE4s",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "codigo",
+							"value": "fsedz",
+							"type": "text"
+						},
+						{
+							"key": "mesa",
+							"value": "10",
+							"type": "text"
+						},
+						{
+							"key": "restaurante",
+							"value": "9",
+							"type": "text"
+						},
+						{
+							"key": "mozo",
+							"value": "9",
+							"type": "text"
+						},
+						{
+							"key": "cocinero",
+							"value": "10",
+							"type": "text"
+						},
+						{
+							"key": "experiencia",
+							"value": "Todo salio bien",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:666/encuesta/alta",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"encuesta",
+						"alta"
+					]
+				}
 			},
 			"response": []
 		}
